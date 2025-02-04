@@ -1,8 +1,10 @@
 import sys
+import random
 
 rule = int(sys.argv[1]) if len(sys.argv) > 1 else 18
-lines = int(sys.argv[2]) if len(sys.argv) > 2 else 31
-width = int(sys.argv[3]) if len(sys.argv) > 3 else 100
+rand = int(sys.argv[2]) if len(sys.argv) > 2 else 0
+lines = int(sys.argv[3]) if len(sys.argv) > 3 else 31
+width = int(sys.argv[4]) if len(sys.argv) > 4 else 100
 
 def display(line):
     print("".join("#" if x == 1 else " " for x in line))
@@ -19,7 +21,12 @@ result = []
 # First Line (all zero, with a single 1 in middle)
 for i in range(width):
     data.append(0)
-data[int(len(data)/2)] = 1
+if rand == 0:
+    data[int(len(data)/2)] = 1
+else:
+    count = random.randrange(width)
+    for i in range(count):
+        data[random.randrange(width)] = 1
 result.append(data.copy())
 # Lines in Succession
 for n in range(lines):
